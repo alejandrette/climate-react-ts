@@ -4,7 +4,7 @@ import { countries } from "../data/country"
 import { Alert } from "./Alert"
 
 type SearchWeatherProps ={
-  fetchWeather: (search: SearchType) => Promise<string | undefined>;
+  fetchWeather: (search: SearchType) => Promise<void>;
 }
 
 export function SearchWeather({ fetchWeather }: SearchWeatherProps) {

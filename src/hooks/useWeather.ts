@@ -1,6 +1,7 @@
 import axios from "axios"
 import { GeoLocation, SearchType } from "../types"
 import { z } from "zod"
+import { useState } from "react"
 
 const Weather = z.object({
   name: z.string(),
@@ -11,7 +12,18 @@ const Weather = z.object({
   })
 })
 
+type WeatherType = z.infer<typeof Weather>
+
 export default function useWeather() {
+  const [weatherResult, setWeatherResult] = useState<WeatherType>({
+    name: '',
+    main: ({
+      temp: 0,
+      temp_max: 0,
+      temp_min: 0,
+    })
+  })
+
   const fetchWeather = async (search: SearchType) => {
     try {
       const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${search.city},${search.country}&appid=${import.meta.env.VITE_API_KEY}`
@@ -23,9 +35,9 @@ export default function useWeather() {
       const result = Weather.safeParse(weatherResult)
 
       if(result.success){
-        return result.data
+        setWeatherResult(result.data)
       } else {
-        console.error('');
+        console.error(result.error);
       }
       
     } catch (error) {
@@ -33,5 +45,5 @@ export default function useWeather() {
     }
   }
 
-  return {fetchWeather}
+  return { fetchWeather, weatherResult }
 }

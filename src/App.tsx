@@ -3,7 +3,7 @@ import { WeatherResult } from "./components/WeatherResult"
 import useWeather from "./hooks/useWeather"
 
 function App() {
-  const { fetchWeather } = useWeather()
+  const { fetchWeather, weatherResult } = useWeather()
 
   return (
     <>
@@ -12,7 +12,9 @@ function App() {
         <SearchWeather 
           fetchWeather={fetchWeather}
         />
-        <WeatherResult />
+        <WeatherResult 
+          weatherResult={weatherResult}
+        />
       </div>
     </>
   )
