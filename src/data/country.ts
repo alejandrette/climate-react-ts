@@ -1,4 +1,4 @@
-import { CountriesType } from "../types/indeex";
+import { CountriesType } from "../types";
 
 export const countries: CountriesType[] = [
   { code: 'US', name: 'Estados Unidos' },

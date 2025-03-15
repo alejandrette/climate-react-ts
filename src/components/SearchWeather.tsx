@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react"
-import { SearchType } from "../types/indeex"
+import { SearchType } from "../types"
 import { countries } from "../data/country"
 import { Alert } from "./Alert"
 
 type SearchWeatherProps ={
-  fetchWeather: (search: SearchType) => Promise<void>;
+  fetchWeather: (search: SearchType) => Promise<string | undefined>;
 }
 
 export function SearchWeather({ fetchWeather }: SearchWeatherProps) {
