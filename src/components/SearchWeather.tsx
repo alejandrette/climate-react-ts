@@ -3,7 +3,11 @@ import { SearchType } from "../types/indeex"
 import { countries } from "../data/country"
 import { Alert } from "./Alert"
 
-export function SearchWeather() {
+type SearchWeatherProps ={
+  fetchWeather: (search: SearchType) => Promise<void>;
+}
+
+export function SearchWeather({ fetchWeather }: SearchWeatherProps) {
   const [search, setSearch] = useState<SearchType>({
     city: '',
     country: ''
@@ -23,8 +27,9 @@ export function SearchWeather() {
       setAlert('Field is Empty')
       setTimeout(() => {
         setAlert('')
-      }, 2000);      
+      }, 2000);   
     }
+    fetchWeather(search)   
   }
 
   return (
