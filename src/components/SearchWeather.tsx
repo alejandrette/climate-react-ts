@@ -33,7 +33,7 @@ export function SearchWeather({ fetchWeather }: SearchWeatherProps) {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <div className="w-80 max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
       <form
         className="flex flex-col gap-4" 
         onSubmit={handleSubmit}

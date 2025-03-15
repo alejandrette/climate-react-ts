@@ -17,7 +17,7 @@ export function WeatherResult({ weatherResult }: WeatherResult) {
             <p className="text-gray-500">Temperature: {Math.round((weatherResult?.main.temp - 32) * 5 / 9)}°C</p>
             <p className="text-gray-500">Max: {Math.round((weatherResult?.main.temp_max - 32) * 5 / 9)}°C | Min: {Math.round((weatherResult?.main.temp_min - 32) * 5 / 9)}°C</p>
           </div>
-        : <p>No Result</p>}
+        : <p className="text-3xl text-center">No Result</p>}
     </div>
   )
 }
