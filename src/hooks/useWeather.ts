@@ -26,7 +26,7 @@ export default function useWeather() {
 
   const fetchWeather = async (search: SearchType) => {
     try {
-      const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${search.city},${search.country}&appid=${import.meta.env.VITE_API_KEY}`
+      const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${search.city},${search.country}&appid=${import.meta.env.VITE_API_KEY}`
       const { data } = await axios.get<GeoLocation[]>(geoUrl)
       const { lat, lon } = data[0] 
 
