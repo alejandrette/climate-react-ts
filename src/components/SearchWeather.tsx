@@ -1,12 +1,14 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import { SearchType } from "../types/indeex"
 import { countries } from "../data/country"
+import { Alert } from "./Alert"
 
 export function SearchWeather() {
   const [search, setSearch] = useState<SearchType>({
     city: '',
     country: ''
   })
+  const [alert, setAlert] = useState<string>('')
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setSearch({
@@ -15,9 +17,22 @@ export function SearchWeather() {
     })
   }
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if(Object.values(search).includes('')){
+      setAlert('Field is Empty')
+      setTimeout(() => {
+        setAlert('')
+      }, 2000);      
+    }
+  }
+
   return (
     <div className="w-full max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-      <form className="flex flex-col gap-4">
+      <form
+        className="flex flex-col gap-4" 
+        onSubmit={handleSubmit}
+      >
         <h2 className="text-2xl font-semibold text-center text-gray-700">🌍 Search Weather</h2>
 
         <div>
@@ -26,7 +41,7 @@ export function SearchWeather() {
             type="text" 
             name="city" 
             placeholder="E.g. Italy, France..."
-            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-400 outline-none bg-transparent text-black"
             onChange={handleChange}
           />
         </div>
@@ -36,7 +51,8 @@ export function SearchWeather() {
           <select 
             name="country"
             onChange={handleChange}
-            className="w-full p-2 border rounded-md bg-white focus:ring-2 focus:ring-blue-400 outline-none"
+            value={search.country}
+            className="w-full p-2 border rounded-md bg-white focus:ring-2 focus:ring-blue-400 outline-none bg-transparent text-black"
           >
             <option disabled value="">-- Select Country --</option>
             {countries.map(country => (
@@ -46,6 +62,8 @@ export function SearchWeather() {
             ))}
           </select>
         </div>
+
+        {alert && <Alert>{alert}</Alert>}
 
         <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition">
           🔍 Search Weather
